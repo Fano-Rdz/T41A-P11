@@ -46,6 +46,10 @@ jobs:
       run: |
         PGPASSWORD=postgres psql -h localhost -U postgres -d test_db -f 01_create_tables.sql
 
+    -name: Import CSV data
+      run: |
+      PGPASSWORD=postgres psql -h localhost -U postgres -d test_db -c "\copy datos(id,categoría,valor,fecha) FROM 'datos_agregacion_transformacion.csv' WITH (FORMAT csv, HEADER true);"
+
 
     - name: Query data
       run: |
